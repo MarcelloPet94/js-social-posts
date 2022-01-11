@@ -135,5 +135,6 @@ for (let c = 0; c < posts.length; c++)
     likeButton[c].addEventListener('click' , function()
     {
         jsLikesCounter[c].innerHTML = posts[c].likes + 1;
+        likeButton[c].classList.add('like-button--liked');
     });
 }
