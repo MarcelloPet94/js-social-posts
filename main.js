@@ -88,53 +88,86 @@ const container = document.getElementById("container");
 // faccio uscire i dati nella pagina
 for (let i = 0; i < posts.length; i++)
 {
+    creaPost(i);
+} 
 
-    // scegli tipo di data
-    let date2 = posts[i].created.month + '-' + posts[i].created.day + '-' + posts[i].created.year;
+function creaPost(n)
+{
 
+    let date2 = posts[n].created.month + '-' + posts[n].created.day + '-' + posts[n].created.year;
     container.innerHTML +=
     `
     <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="${posts[i].author.image}" alt="">                    
+                    <img class="profile-pic" src="${posts[n].author.image}" alt="">                    
                 </div>
                 <div class="post-meta__data">
-                    <div class="post-meta__author">${posts[i].author.name}</div>
+                    <div class="post-meta__author">${posts[n].author.name}</div>
                     <div class="post-meta__time">${date2}</div>
                 </div>                    
             </div>
         </div>
-        <div class="post__text">${posts[i].content}</div>
+        <div class="post__text">${posts[n].content}</div>
         <div class="post__image">
-            <img src="${posts[i].media}" alt="">
+            <img src="${posts[n].media}" alt="">
         </div>
         <div class="post__footer">
             <div class="likes js-likes">
-                <div id="btn-${posts[i].id}" class="likes__cta">
+                <div class="likes__cta">
                     <a class="like-button  js-like-button" href="#!" data-postid="1">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b> persone
+                    Piace a <b id="like-counter-${posts[n].id}" class="js-likes-counter">${posts[n].likes}</b> persone
                 </div>
             </div> 
         </div>            
     </div>
-    `
-} 
+    `   
+}
 
 let likeButton = document.getElementsByClassName('like-button');
 let jsLikesCounter = document.getElementsByClassName('js-likes-counter');
+let dataLike = [];
 
 for (let c = 0; c < posts.length; c++)
 {
     likeButton[c].addEventListener('click' , function()
     {
-        jsLikesCounter[c].innerHTML = posts[c].likes + 1;
+
+        let idLike = posts[c].id;
+        let like = posts[c].likes;
+
+        jsLikesCounter[c].innerHTML = like + 1;  
+        dataLike.push(idLike);
+        console.log(dataLike)      
         likeButton[c].classList.add('like-button--liked');
     });
 }
+
+
+
+/*
+const container = document.getElementById("container");
+
+for (let i = 0; i < 3; i++)
+{
+	getDiv(i);
+}
+
+function getDiv(n)
+{
+  var para = document.createElement("div");
+  para.setAttribute("class" , "creata");
+  container.appendChild(para);
+
+  var interno = document.createElement("div");
+  interno.setAttribute("class" , "interna");
+  interno.innerHTML = "div numero: " + n;
+  para.appendChild(interno);
+}
+*/
